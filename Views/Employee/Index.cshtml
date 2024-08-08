@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Employee.Data.EmployeeDetails>
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<h2>Employees</h2>
+
+<p>
+    <a href="/Employee/Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Awards</th>
+            <th>Leaves</th>
+            <th>Permissions</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.EmployeeId</td>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.Role</td>
+                <td>
+                    @if (@item.Awards != null || @item.Awards.Count() > 0)
+                    {
+                        @foreach (var award in @item.Awards)
+                        {
+                            <div class="mb-4">
+                                <p>
+                                    Type: @award.AwardType
+                                </p>
+                                <p>
+                                    Date: @award.AwardDate.ToString("yyy-MM-dd")
+                                </p>
+                                <p>
+                                    Status: @award.Status
+                                </p>
+                                <a href="/Award/Edit/@award.AwardId" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="/Award/Delete/@award.AwardId" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        }
+                    }
+
+                </td>
+                <td>
+                    @if (@item.Leaves != null || @item.Leaves.Count() > 0)
+                    {
+                        @foreach (var leave in @item.Leaves)
+                        {
+                            <div class="mb-4">
+                                <p>
+                                    Type: @leave.LeaveType
+                                </p>
+                                <p>
+                                    Start Date: @leave.StartDate.ToString("yyy-MM-dd")
+                                </p>
+                                <p>
+                                    End Date: @leave.EndDate.ToString("yyy-MM-dd")
+                                </p>
+                                <p>
+                                    Status: @leave.Status
+                                </p>
+                                <a href="/Leave/Edit/@leave.LeaveId" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="/Leave/Delete/@leave.LeaveId" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        }
+                    }
+                    
+                <td>
+                    @if (@item.Permissions != null || @item.Permissions.Count() > 0)
+                    {
+                        @foreach (var permission in @item.Permissions)
+                        {
+                            <div class="mb-4">
+                                <p>
+                                    Type: @permission.PermissionType
+                                </p>
+                                <p>
+                                    Start Date: @permission.Date.ToString("yyy-MM-dd")
+                                </p>
+                                <p>
+                                    Status: @permission.Status
+                                </p>
+
+                                <a href="/Permission/Edit/@permission.PermissionId" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="/Permission/Delete/@permission.PermissionId" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        }
+                    }
+                    
+                </td>
+                <td>
+                    <a href="/Employee/EmployeeDetails/@item.EmployeeId" class="btn btn-primary btn-sm">View</a>
+                    <a href="/Employee/Edit/@item.EmployeeId" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/Employee/Delete/@item.EmployeeId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model != null && Model.Any())
+{
+    <div class="mt-5 float-end">
+        <button class="btn btn-primary btn-sm" onclick="location.href='/Award/Create'">Create Award</button>
+        <button class="btn btn-primary btn-sm" onclick="location.href='/Leave/Create'">Create Leave</button>
+        <button class="btn btn-primary btn-sm" onclick="location.href='/Permission/Create'">Create Permission</button>
+    </div>
+}

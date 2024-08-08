@@ -1,0 +1,34 @@
+﻿@model Employee.Data.Award
+
+@{
+    ViewData["Title"] = "Edit Award";
+}
+
+<h2>Edit Award</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="AwardId" />
+    <div class="form-group mb-4">
+        <label asp-for="AwardType" class="control-label mb-2"></label>
+        <input asp-for="AwardType" class="form-control" />
+        <span asp-validation-for="AwardType" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-4">
+        <label asp-for="Status" class="control-label mb-2"></label>
+        <input asp-for="Status" class="form-control" />
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-4">
+        <label asp-for="AwardDate" class="control-label mb-2"></label>
+        <input asp-for="AwardDate" class="form-control" type="date" />
+        <span asp-validation-for="AwardDate" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-area="" asp-controller="Employee" asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

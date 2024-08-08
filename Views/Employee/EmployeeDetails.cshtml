@@ -1,0 +1,110 @@
+﻿@model Employee.Data.EmployeeDetails
+
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<h2>Employee Details</h2>
+
+<div>
+    <h4>Employee Information</h4>
+    <hr />
+    <div class="row">
+        <p class="col-sm-2"><strong>Name:</strong></p>
+        <p class="col-sm-10">@Model.Name</p>
+
+        <p class="col-sm-2"><strong>Email:</strong></p>
+        <p class="col-sm-10">@Model.Email</p>
+
+        <p class="col-sm-2"><strong>Role:</strong></p>
+        <p class="col-sm-10">@Model.Role</p>
+    </div>
+
+    <h4>Awards</h4>
+    @if (Model.Awards != null && Model.Awards.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Award Type</th>
+                    <th>Status</th>
+                    <th>Award Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var award in Model.Awards)
+                {
+                    <tr>
+                        <td>@award.AwardType</td>
+                        <td>@award.Status</td>
+                        <td>@award.AwardDate.ToShortDateString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No awards available for this employee.</p>
+    }
+
+    <h4>Leaves</h4>
+    @if (Model.Leaves != null && Model.Leaves.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Leave Type</th>
+                    <th>Status</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var leave in Model.Leaves)
+                {
+                    <tr>
+                        <td>@leave.LeaveType</td>
+                        <td>@leave.Status</td>
+                        <td>@leave.StartDate.ToShortDateString()</td>
+                        <td>@leave.EndDate.ToShortDateString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No leaves available for this employee.</p>
+    }
+
+    <h4>Permissions</h4>
+    @if (Model.Permissions != null && Model.Permissions.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Permission Type</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var permission in Model.Permissions)
+                {
+                    <tr>
+                        <td>@permission.PermissionType</td>
+                        <td>@permission.Status</td>
+                        <td>@permission.Date.ToString("yyy-MM-dd")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No permissions available for this employee.</p>
+    }
+
+    <a asp-area="" asp-controller="Employee" asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

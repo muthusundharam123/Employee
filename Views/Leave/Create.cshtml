@@ -1,0 +1,41 @@
+﻿@model Employee.Data.Leave
+
+
+<h2>Create Leave</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group mb-4">
+        <select asp-for="EmployeeId" class="form-control" asp-items="@(new SelectList(ViewBag.Employees, "EmployeeId", "Name"))">
+            <option value="">Select Employee</option>
+        </select>
+        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-4">
+        <label asp-for="LeaveType" class="control-label mb-2">Leave Type</label>
+        <input asp-for="LeaveType" class="form-control" />
+        <span asp-validation-for="LeaveType" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-4">
+        <label asp-for="Status" class="control-label mb-2">Status</label>
+        <input asp-for="Status" class="form-control" />
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-4">
+        <label asp-for="StartDate" class="control-label mb-2">Start Date</label>
+        <input asp-for="StartDate" class="form-control" type="date" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-4">
+        <label asp-for="EndDate" class="control-label mb-2">End Date</label>
+        <input asp-for="EndDate" class="form-control" type="date" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,36 @@
+﻿@model Employee.Data.Award
+
+
+<h2>Create Award</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group mb-4">
+        <select asp-for="EmployeeId" class="form-control" asp-items="@(new SelectList(ViewBag.Employees, "EmployeeId", "Name"))" required>
+            <option value="">Select Employee</option>
+        </select>
+        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-4">
+        <label asp-for="AwardType" class="control-label mb-2">Award Type</label>
+        <input asp-for="AwardType" class="form-control" required />
+        <span asp-validation-for="AwardType" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-4">
+        <label asp-for="Status" class="control-label mb-2">Status</label>
+        <input asp-for="Status" class="form-control" required />
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-4">
+        <label asp-for="AwardDate" class="control-label mb-2">Award Date</label>
+        <input asp-for="AwardDate" class="form-control" type="date" required />
+        <span asp-validation-for="AwardDate" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,34 @@
+﻿@model Employee.Data.Permission
+
+@{
+    ViewData["Title"] = "Edit Permission";
+}
+
+<h2>Edit Permission</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="PermissionId" />
+    <div class="form-group mb-4">
+        <label asp-for="PermissionType" class="control-label mb-2"></label>
+        <input asp-for="PermissionType" class="form-control" />
+        <span asp-validation-for="PermissionType" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-4">
+        <label asp-for="Status" class="control-label mb-2"></label>
+        <input asp-for="Status" class="form-control" />
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-4">
+        <label asp-for="Date" class="control-label mb-2"></label>
+        <input asp-for="Date" class="form-control" type="date" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-area="" asp-controller="Employee" asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
